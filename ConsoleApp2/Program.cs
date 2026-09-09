@@ -116,6 +116,24 @@ namespace ConsoleApp2
                 Console.WriteLine($"{i + 1}. {names[i]} — {prices[i]} руб.");
             }
         }
+        static void ShowStatistics(double[] prices)
+        {
+            double sum = 0;
+            double min = prices[0];
+            double max = prices[0];
+            foreach (double price in prices)
+            {
+                sum += price;
+                if (price < min) min = price;
+                if (price > max) max = price;
+            }
+            double average = sum / prices.Length;
+            Console.WriteLine("--- Статистика ---");
+            Console.WriteLine($"Сумма: {sum} руб.");
+            Console.WriteLine($"Среднее: {average:F2} руб.");
+            Console.WriteLine($"Минимальное: {min} руб.");
+            Console.WriteLine($"Максимальное: {max} руб.");
+        }
     }
 }
    
