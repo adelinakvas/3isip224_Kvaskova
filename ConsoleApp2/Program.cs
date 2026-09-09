@@ -152,7 +152,34 @@ namespace ConsoleApp2
                 }
             }
         }
-
+        static void ConvertCurrency(string[] names, double[] prices)
+        {
+            Console.WriteLine("Выберите валюту для конвертации из рублей:");
+            Console.WriteLine("1. USD (Доллар)");
+            Console.WriteLine("2. EUR (Евро)");
+            Console.WriteLine("3. Ввести свой курс вручную");
+            Console.Write("Выбор: ");
+            string choice = Console.ReadLine();
+            double rate = 0;
+            if (choice == "1") rate = 92.5;
+            else if (choice == "2") rate = 100.2;
+            else if (choice == "3")
+            {
+                Console.Write("Введите курс (сколько рублей в 1 единице чужой валюты): ");
+                double.TryParse(Console.ReadLine(), out rate);
+            }
+            if (rate <= 0)
+            {
+                Console.WriteLine("Некорректный курс.");
+                return;
+            }
+            Console.WriteLine("\nРезультат конвертации:");
+            for (int i = 0; i < prices.Length; i++)
+            {
+                double converted = prices[i] / rate;
+                Console.WriteLine($"{names[i]} — {converted:F2} ед. вал. (по курсу {rate})");
+            }
+        }
     }
 }
    
