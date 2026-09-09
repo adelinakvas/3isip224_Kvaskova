@@ -20,6 +20,8 @@ namespace ConsoleApp2
                 }
                 Console.WriteLine("Ошибка! Нужно ввести число от 2 до 40.");
             }
+            string[] names = new string[count];
+            double[] prices = new double[count];
 
         }
     }
