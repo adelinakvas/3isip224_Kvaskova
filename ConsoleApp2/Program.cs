@@ -22,7 +22,47 @@ namespace ConsoleApp2
             }
             string[] names = new string[count];
             double[] prices = new double[count];
+            Console.WriteLine("\nВводите траты по шаблону: (Название услуги или товара; Количество денег)");
+            Console.WriteLine("Пример: (Влажные салфетки \"Лента\"; 235)");
+            for (int i = 0; i < count; i++)
+            {
+                while (true)
+                {
+                    Console.Write($"Запись {i + 1}: ");
+                    string input = Console.ReadLine()?.Trim();
 
+                    try
+                    {
+                        if (string.IsNullOrEmpty(input) || !input.StartsWith("(") || !input.EndsWith(")") || !input.Contains(";"))
+                        {
+                            throw new Exception();
+                        }
+                        if (string.IsNullOrEmpty(input) || !input.StartsWith("(") || !input.EndsWith(")") || !input.Contains(";"))
+                        {
+                            throw new Exception();
+                        }
+                        string content = input.Substring(1, input.Length - 2);
+                        int separatorIndex = content.LastIndexOf(';');
+                        string name = content.Substring(0, separatorIndex).Trim();
+                        string amountStr = content.Substring(separatorIndex + 1).Trim();
+                        if (double.TryParse(amountStr, out double amount) && amount >= 0)
+                        {
+                            names[i] = name;
+                            prices[i] = amount;
+                            break;
+                        }
+                        else
+                        {
+                            throw new Exception();
+                        }
+                    }
+                    catch
+                    {
+                        Console.WriteLine("Неверный формат! Повторите ввод строго по шаблону.");
+                    }
+                }
+            }
         }
     }
 }
+   
