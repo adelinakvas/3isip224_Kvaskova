@@ -66,7 +66,7 @@ namespace ConsoleApp2
                 Console.WriteLine("\n МЕНЮ ");
                 Console.WriteLine("1. Вывод данных");
                 Console.WriteLine("2. Статистика (среднее, максимальное, минимальное, сумма)");
-                Console.WriteLine("3. Сортировка по цене (пузырьковая сортировка)");
+                Console.WriteLine("3. Сортировка по цене");
                 Console.WriteLine("4. Конвертация валюты");
                 Console.WriteLine("5. Поиск по названию");
                 Console.WriteLine("0. Выход");
@@ -161,8 +161,8 @@ namespace ConsoleApp2
             Console.Write("Выбор: ");
             string choice = Console.ReadLine();
             double rate = 0;
-            if (choice == "1") rate = 92.5;
-            else if (choice == "2") rate = 100.2;
+            if (choice == "1") rate = 85.7;
+            else if (choice == "2") rate = 99.8;
             else if (choice == "3")
             {
                 Console.Write("Введите курс (сколько рублей в 1 единице чужой валюты): ");
@@ -178,6 +178,26 @@ namespace ConsoleApp2
             {
                 double converted = prices[i] / rate;
                 Console.WriteLine($"{names[i]} — {converted:F2} ед. вал. (по курсу {rate})");
+            }
+        }
+        static void SearchByName(string[] names, double[] prices)
+        {
+            Console.Write("Введите название товара или услуги для поиска: ");
+            string query = Console.ReadLine()?.Trim();
+            if (string.IsNullOrEmpty(query)) return;
+            bool found = false;
+            Console.WriteLine("\nРезультаты поиска:");
+            for (int i = 0; i < names.Length; i++)
+            {
+                if (names[i].ToLower().Contains(query.ToLower()))
+                {
+                    Console.WriteLine($"{names[i]} — {prices[i]} руб.");
+                    found = true;
+                }
+            }
+            if (!found)
+            {
+                Console.WriteLine("Ничего не найдено.");
             }
         }
     }
