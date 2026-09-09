@@ -30,7 +30,6 @@ namespace ConsoleApp2
                 {
                     Console.Write($"Запись {i + 1}: ");
                     string input = Console.ReadLine()?.Trim();
-
                     try
                     {
                         if (string.IsNullOrEmpty(input) || !input.StartsWith("(") || !input.EndsWith(")") || !input.Contains(";"))
@@ -72,7 +71,6 @@ namespace ConsoleApp2
                 Console.WriteLine("5. Поиск по названию");
                 Console.WriteLine("0. Выход");
                 Console.Write("Выберите пункт меню: ");
-
                 string choice = Console.ReadLine();
                 Console.WriteLine();
 
@@ -110,7 +108,14 @@ namespace ConsoleApp2
                 }
             }
         }
+        static void PrintExpenses(string[] names, double[] prices)
+        {
+            Console.WriteLine("Список трат:");
+            for (int i = 0; i < names.Length; i++)
+            {
+                Console.WriteLine($"{i + 1}. {names[i]} — {prices[i]} руб.");
+            }
+        }
     }
-    
 }
    
