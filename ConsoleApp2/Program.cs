@@ -62,7 +62,55 @@ namespace ConsoleApp2
                     }
                 }
             }
+            while (true)
+            {
+                Console.WriteLine("\n МЕНЮ ");
+                Console.WriteLine("1. Вывод данных");
+                Console.WriteLine("2. Статистика (среднее, максимальное, минимальное, сумма)");
+                Console.WriteLine("3. Сортировка по цене (пузырьковая сортировка)");
+                Console.WriteLine("4. Конвертация валюты");
+                Console.WriteLine("5. Поиск по названию");
+                Console.WriteLine("0. Выход");
+                Console.Write("Выберите пункт меню: ");
+
+                string choice = Console.ReadLine();
+                Console.WriteLine();
+
+                switch (choice)
+                {
+                    case "1":
+                        PrintExpenses(names, prices);
+                        break;
+
+                    case "2":
+                        ShowStatistics(prices);
+                        break;
+
+                    case "3":
+                        BubbleSort(names, prices);
+                        Console.WriteLine("Данные отсортированы по возрастанию цены.");
+                        PrintExpenses(names, prices);
+                        break;
+
+                    case "4":
+                        ConvertCurrency(names, prices);
+                        break;
+
+                    case "5":
+                        SearchByName(names, prices);
+                        break;
+
+                    case "0":
+                        Console.WriteLine("Программа завершена.");
+                        return;
+
+                    default:
+                        Console.WriteLine("Неверный пункт меню, попробуйте еще раз.");
+                        break;
+                }
+            }
         }
     }
+    
 }
    
