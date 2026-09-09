@@ -134,6 +134,25 @@ namespace ConsoleApp2
             Console.WriteLine($"Минимальное: {min} руб.");
             Console.WriteLine($"Максимальное: {max} руб.");
         }
+        static void BubbleSort(string[] names, double[] prices)
+        {
+            for (int i = 0; i < prices.Length - 1; i++)
+            {
+                for (int j = 0; j < prices.Length - i - 1; j++)
+                {
+                    if (prices[j] > prices[j + 1])
+                    {
+                        double tempPrice = prices[j];
+                        prices[j] = prices[j + 1];
+                        prices[j + 1] = tempPrice;
+                        string tempName = names[j];
+                        names[j] = names[j + 1];
+                        names[j + 1] = tempName;
+                    }
+                }
+            }
+        }
+
     }
 }
    
