@@ -8,6 +8,13 @@ namespace ConsoleApp2
 {
     internal class Program
     {
+        public enum Category
+        {
+            Electronics = 1,
+            Food,
+            Clothing,
+            Books
+        }
         static void Main(string[] args)
         {
         }
