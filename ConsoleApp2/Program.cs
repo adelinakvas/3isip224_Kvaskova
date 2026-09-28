@@ -118,4 +118,22 @@ namespace ConsoleApp2
             _products.Add(newProduct);
             Console.WriteLine($"Товар успешно добавлен! Код: {newProduct.Code}");
         }
+        private static void DeleteProductCommand()
+        {
+            Console.WriteLine(" УДАЛЕНИЕ ТОВАРА ");
+            Console.Write("Введите код товара: ");
+            if (!int.TryParse(Console.ReadLine(), out int code))
+            {
+                Console.WriteLine("Ошибка: Некорректный формат кода.");
+                return;
+            }
+            Product product = _products.FirstOrDefault(p => p.Code == code);
+            if (product == null)
+            {
+                Console.WriteLine("Товар с таким кодом не найден.");
+                return;
+            }
+            _products.Remove(product);
+            Console.WriteLine($"Товар '{product.Name}' успешно удален.");
+        }
     }
