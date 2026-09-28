@@ -14,7 +14,7 @@ namespace ConsoleApp2
             SeedData();
             while (true)
             {
-                Console.WriteLine("\n--- СИСТЕМА УЧЁТА ТОВАРОВ ---");
+                Console.WriteLine("\n СИСТЕМА УЧЁТА ТОВАРОВ ");
                 Console.WriteLine("1. Показать все товары");
                 Console.WriteLine("2. Добавить товар");
                 Console.WriteLine("3. Удалить товар");
@@ -80,5 +80,42 @@ namespace ConsoleApp2
             {
                 Console.WriteLine(product);
             }
+        }
+        private static void AddProductCommand()
+        {
+            Console.WriteLine(" ДОБАВЛЕНИЕ ТОВАРА ");
+            Console.Write("Введите название товара: ");
+            string name = Console.ReadLine();
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                Console.WriteLine("Ошибка: Название не может быть пустым.");
+                return;
+            }
+            Console.Write("Введите цену товара: ");
+            if (!decimal.TryParse(Console.ReadLine(), out decimal price) || price < 0)
+            {
+                Console.WriteLine("Ошибка: Некорректная или отрицательная цена.");
+                return;
+            }
+            Console.Write("Введите количество товара: ");
+            if (!int.TryParse(Console.ReadLine(), out int quantity) || quantity < 0)
+            {
+                Console.WriteLine("Ошибка: Некорректное или отрицательное количество.");
+                return;
+            }
+            Console.WriteLine("Выберите категорию:");
+            foreach (var cat in Enum.GetValues(typeof(Category)))
+            {
+                Console.WriteLine($"{(int)cat}. {cat}");
+            }
+            if (!int.TryParse(Console.ReadLine(), out int catChoice) || !Enum.IsDefined(typeof(Category), catChoice))
+            {
+                Console.WriteLine("Ошибка: Выбрана несуществующая категория.");
+                return;
+            }
+            Category category = (Category)catChoice;
+            Product newProduct = new Product(name, price, quantity, category);
+            _products.Add(newProduct);
+            Console.WriteLine($"Товар успешно добавлен! Код: {newProduct.Code}");
         }
     }
