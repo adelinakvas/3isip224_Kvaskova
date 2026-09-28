@@ -189,4 +189,62 @@ namespace ConsoleApp2
             product.SetQuantity(product.Quantity - amount);
             Console.WriteLine($"Продано {amount} шт. Остаток: {product.Quantity}");
         }
+        private static void SearchProductsCommand()
+        {
+            Console.WriteLine(" ПОИСК ТОВАРОВ ");
+            Console.WriteLine("1. По коду");
+            Console.WriteLine("2. По названию");
+            Console.WriteLine("3. По категории");
+            Console.Write("Критерий поиска: ");
+            string searchChoice = Console.ReadLine();
+            List<Product> results = new List<Product>();
+            switch (searchChoice)
+            {
+                case "1":
+                    Console.Write("Введите код: ");
+                    if (int.TryParse(Console.ReadLine(), out int code))
+                    {
+                        var prod = _products.FirstOrDefault(p => p.Code == code);
+                        if (prod != null) results.Add(prod);
+                    }
+                    break;
+                case "2":
+                    Console.Write("Введите название: ");
+                    string query = Console.ReadLine()?.ToLower();
+                    if (!string.IsNullOrEmpty(query))
+                    {
+                        results = _products.Where(p => p.Name.ToLower().Contains(query)).ToList();
+                    }
+                    break;
+                case "3":
+                    Console.WriteLine("Выберите категорию:");
+                    foreach (var cat in Enum.GetValues(typeof(Category)))
+                    {
+                        Console.WriteLine($"{(int)cat}. {cat}");
+                    }
+                    if (int.TryParse(Console.ReadLine(), out int catChoice) && Enum.IsDefined(typeof(Category), catChoice))
+                    {
+                        Category selectedCategory = (Category)catChoice;
+                        results = _products.Where(p => p.ProductCategory == selectedCategory).ToList();
+                    }
+                    break;
+                default:
+                    Console.WriteLine("Неверный критерий.");
+                    return;
+            }
+            Console.WriteLine("\nРезультаты:");
+            if (results.Count == 0)
+            {
+                Console.WriteLine("Ничего не найдено.");
+            }
+            else
+            {
+                foreach (var product in results)
+                {
+                    Console.WriteLine(product);
+                }
+            }
+        }
+
     }
+}
