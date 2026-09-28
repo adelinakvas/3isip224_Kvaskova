@@ -136,4 +136,28 @@ namespace ConsoleApp2
             _products.Remove(product);
             Console.WriteLine($"Товар '{product.Name}' успешно удален.");
         }
+        private static void RestockProductCommand()
+        {
+            Console.WriteLine(" ПОСТАВКА ТОВАРА ");
+            Console.Write("Введите код товара: ");
+            if (!int.TryParse(Console.ReadLine(), out int code))
+            {
+                Console.WriteLine("Ошибка: Некорректный формат кода.");
+                return;
+            }
+            Product product = _products.FirstOrDefault(p => p.Code == code);
+            if (product == null)
+            {
+                Console.WriteLine("Товар с таким кодом не найден.");
+                return;
+            }
+            Console.Write($"Количество для поставки '{product.Name}': ");
+            if (!int.TryParse(Console.ReadLine(), out int amount) || amount <= 0)
+            {
+                Console.WriteLine("Ошибка: Количество должно быть больше нуля.");
+                return;
+            }
+            product.SetQuantity(product.Quantity + amount);
+            Console.WriteLine($"Поставка принята. Всего: {product.Quantity}");
+        }
     }
