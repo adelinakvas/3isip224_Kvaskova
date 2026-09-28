@@ -69,4 +69,16 @@ namespace ConsoleApp2
             _products.Add(new Product("Ноутбук", 85000, 5, Category.Electronics));
             _products.Add(new Product("Книга C#", 1200, 12, Category.Books));
         }
+        private static void ShowAllProducts()
+        {
+            if (_products.Count == 0)
+            {
+                Console.WriteLine("Список товаров пуст.");
+                return;
+            }
+            foreach (var product in _products)
+            {
+                Console.WriteLine(product);
+            }
+        }
     }
