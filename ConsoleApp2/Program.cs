@@ -8,55 +8,23 @@ namespace ConsoleApp2
 {
     internal class Program
     {
-        public enum Category
-        {
-            Electronics = 1,
-            Food,
-            Clothing,
-            Books
-        }
-        public class Product
-        {
-            private static int _nextId = 1000;
-            public int Code { get; private set; }
-            public string Name { get; private set; }
-            public decimal Price { get; private set; }
-            public int Quantity { get; private set; }
-            public Category ProductCategory { get; private set; }
-            public bool IsInStock => Quantity > 0;
-            public Product(string name, decimal price, int quantity, Category category)
-            {
-                SetName(name);
-                SetPrice(price);
-                SetQuantity(quantity);
-                ProductCategory = category;
-                Code = _nextId++; 
-            }
-            public void SetName(string name)
-            {
-                if (string.IsNullOrWhiteSpace(name))
-                    throw new ArgumentException("Название товара не может быть пустым.");
-                Name = name.Trim();
-            }
-            public void SetPrice(decimal price)
-            {
-                if (price < 0)
-                    throw new ArgumentException("Цена не может быть отрицательной.");
-                Price = price;
-            }
-            public void SetQuantity(int quantity)
-            {
-                if (quantity < 0)
-                    throw new ArgumentException("Количество не может быть отрицательным.");
-                Quantity = quantity;
-            }
-            public override string ToString()
-            {
-                return $"[Код: {Code}] {Name} | Категория: {ProductCategory} | Цена: {Price:F2} руб. | Кол-во: {Quantity} шт. | В наличии: {(IsInStock ? "Да" : "Нет")}";
-            }
-        }
+        private static List<Product> _products = new List<Product>();
+
         static void Main(string[] args)
         {
-        }
-    }
+            SeedData();
+
+            while (true)
+            {
+                Console.WriteLine("\n--- СИСТЕМА УЧЁТА ТОВАРОВ ---");
+                Console.WriteLine("1. Показать все товары");
+                Console.WriteLine("2. Добавить товар");
+                Console.WriteLine("3. Удалить товар");
+                Console.WriteLine("4. Заказать поставку товара");
+                Console.WriteLine("5. Продать товар");
+                Console.WriteLine("6. Поиск товаров");
+                Console.WriteLine("0. Выход");
+                Console.Write("Выберите команду: ");
+                string choice = Console.ReadLine();
+                Console.WriteLine();
 }
