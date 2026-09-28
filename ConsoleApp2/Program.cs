@@ -245,6 +245,12 @@ namespace ConsoleApp2
                 }
             }
         }
-
+    }
+    public enum Category
+    {
+        Electronics = 1,
+        Food,
+        Clothing,
+        Books
     }
 }
