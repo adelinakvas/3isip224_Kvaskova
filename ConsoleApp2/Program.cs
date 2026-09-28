@@ -160,4 +160,33 @@ namespace ConsoleApp2
             product.SetQuantity(product.Quantity + amount);
             Console.WriteLine($"Поставка принята. Всего: {product.Quantity}");
         }
+        private static void SellProductCommand()
+        {
+            Console.WriteLine(" ПРОДАЖА ТОВАРА ");
+            Console.Write("Введите код товара: ");
+            if (!int.TryParse(Console.ReadLine(), out int code))
+            {
+                Console.WriteLine("Ошибка: Некорректный формат кода.");
+                return;
+            }
+            Product product = _products.FirstOrDefault(p => p.Code == code);
+            if (product == null)
+            {
+                Console.WriteLine("Товар с таким кодом не найден.");
+                return;
+            }
+            Console.Write($"Количество для продажи '{product.Name}': ");
+            if (!int.TryParse(Console.ReadLine(), out int amount) || amount <= 0)
+            {
+                Console.WriteLine("Ошибка: Количество должно быть больше нуля.");
+                return;
+            }
+            if (product.Quantity < amount)
+            {
+                Console.WriteLine($"Ошибка: Недостаточно товара. Доступно: {product.Quantity}");
+                return;
+            }
+            product.SetQuantity(product.Quantity - amount);
+            Console.WriteLine($"Продано {amount} шт. Остаток: {product.Quantity}");
+        }
     }
