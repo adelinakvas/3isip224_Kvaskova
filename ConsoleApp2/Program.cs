@@ -61,4 +61,12 @@ namespace ConsoleApp2
                 }
             }
         }
+        private static void SeedData()
+        {
+            _products.Add(new Product("Смартфон", 45000, 10, Category.Electronics));
+            _products.Add(new Product("Молоко", 90, 50, Category.Food));
+            _products.Add(new Product("Футболка", 1500, 25, Category.Clothing));
+            _products.Add(new Product("Ноутбук", 85000, 5, Category.Electronics));
+            _products.Add(new Product("Книга C#", 1200, 12, Category.Books));
+        }
     }
